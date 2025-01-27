@@ -1,0 +1,17 @@
+a:hover{
+    text-decoration: none;
+    color: white;
+}
+a{
+    color: yellow;
+   
+}
+.btn-outline-warning{
+   
+}
+.btn {
+    border-width: 3px;
+    margin: 2px;
+    width: 100px;
+}
+
