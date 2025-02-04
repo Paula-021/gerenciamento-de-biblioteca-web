@@ -1,10 +1,16 @@
+<%-- 
+    Document   : CadastrarEmprestimo
+    Created on : 01/02/2025, 12:51:01
+    Author     : anapa
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cadastro de Livros</title>
+        <title>Cadastro de Empréstimos</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
@@ -26,7 +32,7 @@
                 text-align: center;
                 margin-bottom: 20px;
             }
-            .form-group input {
+            .form-group input, .form-group select {
                 margin-bottom: 10px;
             }
             .table {
@@ -36,37 +42,46 @@
     </head>
     <body>
         <div class="container">
-            <h1>Cadastro de Livros</h1>
-            <form class="form-group" action="cadastrar-livro" method="POST"> 
-                <input class="form-control" placeholder="Digite o título" name="titulo" required>
-                <input class="form-control" placeholder="Digite o autor" name="autor" required>
-                <input class="form-control" placeholder="Digite o genero" name="genero" required>
-                <input class="form-control" placeholder="Digite o isbn" name="isbn" required>
-                
+            <h1>Cadastro de Empréstimos</h1>
+            <form class="form-group" action="cadastrar-emprestimo" method="POST"> 
+                <select class="form-control" name="idLivro" required>
+                    <option value="" disabled selected>Selecione o livro</option>
+                    <c:forEach var="livro" items="${livros}">
+                        <option value="${livro.id}">${livro.titulo}</option>
+                    </c:forEach>
+                </select>
+                <select class="form-control" name="idUsuario" required>
+                    <option value="" disabled selected>Selecione o usuário</option>
+                    <c:forEach var="usuario" items="${usuarios}">
+                        <option value="${usuario.id}">${usuario.nome}</option>
+                    </c:forEach>
+                </select>
+                <input class="form-control" type="date" name="dataInicio" required>
+                <input class="form-control" type="date" name="dataFim" required>
                 <button class="btn btn-primary btn-block mt-3" type="submit">Cadastrar</button>
             </form>
 
             <table class="table table-bordered table-hover mt-4">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Título</th>
-                        <th scope="col">Autor</th>
-                        <th scope="col">Genero</th>
-                        <th scope="col">Isbn</th>
+                        <th scope="col">Livro</th>
+                        <th scope="col">Usuário</th>
+                        <th scope="col">Data Início</th>
+                        <th scope="col">Data Fim</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="livro" items="${livros}">
+                    <c:forEach var="emprestimo" items="${emprestimos}">
                         <tr>
-                            <td>${livro.titulo}</td>
-                            <td>${livro.autor}</td>
-                            <td>${livro.genero}</td>
-                             <td>${livro.isbn}</td>
+                            <td>${emprestimo.livroTitulo}</td>
+                            <td>${emprestimo.usuarioNome}</td>
+                            <td>${emprestimo.dataInicio}</td>
+                            <td>${emprestimo.dataFim}</td>
                             <td>
-                                <a class="btn btn-warning btn-sm" href="${caminhoContexto}/editar-livro?id=${livro.id}&titulo=${livro.titulo}&autor=${livro.autor}&genero=${livro.genero}&isbn=${livro.isbn}">Editar</a>
-                                <form action="excluir-livro" method="POST" style="display:inline;">
-                                    <input type="hidden" value="${livro.id}" name="id">
+                                <a class="btn btn-warning btn-sm" href="${caminhoContexto}/editar-emprestimo?id=${emprestimo.id}&idLivro=${emprestimo.idLivro}&idUsuario=${emprestimo.idUsuario}&dataInicio=${emprestimo.dataInicio}&dataFim=${emprestimo.dataFim}">Editar</a>
+                                <form action="excluir-emprestimo" method="POST" style="display:inline;">
+                                    <input type="hidden" value="${emprestimo.id}" name="id">
                                     <button class="btn btn-danger btn-sm" type="submit">Remover</button>
                                 </form>
                             </td>
@@ -82,7 +97,3 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" crossorigin="anonymous"></script>
     </body>
 </html>
-
-
-
-

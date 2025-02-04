@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package conexao;
+package connect;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,6 +16,6 @@ import java.sql.SQLException;
 public class Conexao {
 
     public Connection getConnection() throws SQLException{
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/gerenciamentolivros?useSSL=false", "root", "24458667ap2");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/gerenciamentodebiblioteca?useSSL=false", "root", "24458667ap2");
     }
 }

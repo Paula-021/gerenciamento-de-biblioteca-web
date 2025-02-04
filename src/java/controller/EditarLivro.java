@@ -29,9 +29,10 @@ public class EditarLivro extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String titulo = request.getParameter("titulo");
         String autor = request.getParameter("autor");
-        int anoPubli = Integer.parseInt(request.getParameter("anoPubli"));
+        String genero = request.getParameter("genero");
+        String isbn = request.getParameter("isbn");
 
-        Livro livro = new Livro(id, titulo, autor, anoPubli);
+        Livro livro = new Livro(id, titulo, autor, genero, isbn);
 
         System.out.println("Livro: " + livro.getTitulo());
         request.setAttribute("livros", new LivroModel().selectAll());
@@ -49,9 +50,10 @@ public class EditarLivro extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String titulo = request.getParameter("titulo");
         String autor = request.getParameter("autor");
-        int anoPubli = Integer.parseInt(request.getParameter("anoPubli"));
+        String genero = request.getParameter("genero");
+        String isbn = request.getParameter("isbn");
         
-        Livro livro = new Livro(id, titulo, autor, anoPubli);
+        Livro livro = new Livro(id, titulo, autor, genero, isbn);
         
         new LivroModel().update(livro);
         

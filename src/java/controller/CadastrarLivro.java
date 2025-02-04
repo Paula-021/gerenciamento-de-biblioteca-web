@@ -28,12 +28,13 @@ public class CadastrarLivro extends HttpServlet {
 
     
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)  //carregarPagina
             throws ServletException, IOException {
     
         request.setAttribute("livros", new LivroModel().selectAll());
        
         request.setAttribute("caminhoContexto", request.getContextPath());
+        
         request.getRequestDispatcher("WEB-INF/pageCadastrarLivro.jsp").forward(request, response);
         
         
@@ -41,16 +42,18 @@ public class CadastrarLivro extends HttpServlet {
 
     
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) //enviar dados do frontend para o backend
             throws ServletException, IOException {
         
-        //receber os dados que o usuário digitou
+        //receber os dados que o usuário digitou no formulário
         
         String titulo = request.getParameter("titulo");
         String autor = request.getParameter("autor");
-        int anoPubli = Integer.parseInt(request.getParameter("anoPubli"));
+        String genero = request.getParameter("genero");
+        String isbn = request.getParameter("isbn");
         
-        Livro livro = new Livro(titulo, autor, anoPubli);
+        
+        Livro livro = new Livro(titulo, autor, genero, isbn);
         
         LivroModel livroModel = new LivroModel();
         livroModel.insert(livro);

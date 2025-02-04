@@ -5,7 +5,7 @@
  */
 package daos;
 
-import conexao.Conexao;
+import connect.Conexao;
 import entities.Livro;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 public class LivroDao {
 
     public void insert(Livro livro) {
-        String sql = "INSERT INTO Livro (titulo, autor, anoPubli)values (?, ?, ?)";
+        String sql = "INSERT INTO Livro (titulo, autor, genero, isbn)values (?, ?, ?,?)";
         Connection con = null;
         PreparedStatement ps = null;
         try {
@@ -30,7 +30,8 @@ public class LivroDao {
             ps = con.prepareStatement(sql);
             ps.setString(1, livro.getTitulo());
             ps.setString(2, livro.getAutor());
-            ps.setInt(3, livro.getAnoPubli());
+            ps.setString(3, livro.getGenero());
+            ps.setString(4, livro.getIsbn());
 
             ps.execute();
 
@@ -56,25 +57,26 @@ public class LivroDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Livro livro = new Livro(rs.getInt("ID"), rs.getString("titulo"), rs.getString("autor"), rs.getInt("anoPubli"));
+                Livro livro = new Livro(rs.getInt("ID"), rs.getString("titulo"), rs.getString("autor"), rs.getString("genero"), rs.getString("isbn"));
                 livros.add(livro);
             }
         } catch (Exception e) {
         }
-
+        
         return livros;
 
     }
 
     public void update(Livro livro) {
-        String sql = "UPDATE livro SET titulo = ?, autor = ?, anoPubli = ? WHERE id = ?";
+        String sql = "UPDATE livro SET titulo = ?, autor = ?, genero = ?, isbn = ? WHERE id = ?";
         try {
             Connection con = new Conexao().getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, livro.getTitulo());
             ps.setString(2, livro.getAutor());
-            ps.setInt(3, livro.getAnoPubli());
-            ps.setInt(4, livro.getId());
+            ps.setString(3, livro.getGenero());
+            ps.setString(4, livro.getIsbn());
+            ps.setInt(5, livro.getId());
 
             ps.execute();
 

@@ -16,14 +16,8 @@ import java.util.ArrayList;
  */
 public class LivroModel {
 
-    public String insert(Livro livro) {
-        if(livro.getTitulo().isEmpty() || livro.getAutor().isEmpty() || livro.getAnoPubli().toString().length() < 4) {
-            return "Preencha todos os campos. O ano de publicação deve ter 4 números.";
-        }else{
-        
-            new LivroDao().insert(livro);
-            return "Livro inserido";
-        }
+    public void insert(Livro livro) {
+        new LivroDao().insert(livro);
     }
 
     public ArrayList<Livro> selectAll() {

@@ -14,19 +14,25 @@ public class Livro {
     private int id;
     private String titulo;
     private String autor;
-    private Integer anoPubli;
+    private String genero;
+    private String isbn;
 
-    public Livro(int id, String titulo, String autor, Integer anoPubli) {
+    public Livro() {
+    }
+
+    public Livro(String titulo, String autor, String genero, String isbn) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.genero = genero;
+        this.isbn = isbn;
+    }
+
+    public Livro(int id, String titulo, String autor, String genero, String isbn) {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;
-        this.anoPubli = anoPubli;
-    }
-
-    public Livro(String titulo, String autor, int anoPubli) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.anoPubli = anoPubli;
+        this.genero = genero;
+        this.isbn = isbn;
     }
 
     public int getId() {
@@ -53,14 +59,21 @@ public class Livro {
         this.autor = autor;
     }
 
-    public Integer getAnoPubli() {
-        return anoPubli;
+    public String getGenero() {
+        return genero;
     }
 
-    public void setAnoPubli(Integer anoPubli) {
-        this.anoPubli = anoPubli;
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
-   
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
     
 }
